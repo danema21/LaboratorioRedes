@@ -4,9 +4,8 @@ main: cliente.o server.o
 
 cliente.o: cliente.c
 
-server.o: server.c
-	
+server.o: server.c	
 
 clean:
-	rm -rf *.o sistema
+	rm -rf *.o cliente sistema
 	clear
