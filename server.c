@@ -99,11 +99,10 @@ void chat(int fd2, struct sockaddr_in cliente){
             send(fd2, buffer, sizeof(buffer), 0);
         }else if(strcmp(buffer, "ip\n") == 0){
             struct in_addr clientIP = cliente.sin_addr;
-            //char buffer[INET_ADDRSTRLEN];
             inet_ntop(AF_INET, &clientIP, buffer, INET_ADDRSTRLEN);
             send(fd2, buffer, sizeof(buffer), 0);            
         }else if(strcmp(buffer, "nombre\n") == 0){
-            strcpy(buffer,"Servidor Quesos");
+            gethostname(buffer,sizeof(buffer));
             send(fd2, buffer, sizeof(buffer), 0);
         }else if(strcmp(buffer, "fecha\n") == 0){
             setFecha(buffer);
