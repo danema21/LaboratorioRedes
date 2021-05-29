@@ -95,7 +95,7 @@ void chat(int fd2, struct sockaddr_in cliente){
             strcpy(buffer, "\n*hora: retorna la hora del sistema\n*ip: retorna la IP del servidor\n*nombre: retorna el nombre del servidor\n*fecha: retorna la fecha\n*exit: cierra la conexion");
             send(fd2, buffer, sizeof(buffer), 0);
         }else if(strcmp(buffer, "hora\n") == 0){
-            setHora(buffer);
+            getHora(buffer);
             send(fd2, buffer, sizeof(buffer), 0);
         }else if(strcmp(buffer, "ip\n") == 0){
             struct in_addr clientIP = cliente.sin_addr;
@@ -105,7 +105,7 @@ void chat(int fd2, struct sockaddr_in cliente){
             gethostname(buffer,sizeof(buffer));
             send(fd2, buffer, sizeof(buffer), 0);
         }else if(strcmp(buffer, "fecha\n") == 0){
-            setFecha(buffer);
+            getFecha(buffer);
             send(fd2, buffer, sizeof(buffer), 0);
         }else if(strcmp(buffer, "exit\n") == 0){
             strcpy(buffer, "cerrando la conexion...");
@@ -118,14 +118,14 @@ void chat(int fd2, struct sockaddr_in cliente){
     }
 }
 
-void setHora(char *Hora){
+void getHora(char *Hora){
         time_t tiempo = time(0);
         struct tm *tlocal = localtime(&tiempo);
         strftime(Hora,10, /*" %d/%m/%y */ "%H:%M:%S", tlocal);
         
 }
 
-void setFecha(char *fecha){
+void getFecha(char *fecha){
         time_t date = time(0);
         struct tm *tlocal = localtime(&date);
         strftime(fecha,10, "%d/%m/%y", tlocal);
